@@ -26,12 +26,6 @@ public class DogBreedsAdapter extends RecyclerView.Adapter<DogBreedsAdapter.Gene
         this.viewModel = viewModel;
     }
 
-
-    private DogBreed getObjForPosition(int position) {
-        return breeds.get(position);
-    }
-
-
     private int getLayoutIdForPosition(int position) {
         return layoutId;
     }
@@ -50,8 +44,7 @@ public class DogBreedsAdapter extends RecyclerView.Adapter<DogBreedsAdapter.Gene
 
     @Override
     public void onBindViewHolder(@NonNull GenericViewHolder holder, int position) {
-        DogBreed obj = getObjForPosition(position);
-        holder.bind(obj, viewModel);
+        holder.bind(viewModel, position);
     }
 
     @Override
@@ -63,7 +56,6 @@ public class DogBreedsAdapter extends RecyclerView.Adapter<DogBreedsAdapter.Gene
         this.breeds = breeds;
     }
 
-
     class GenericViewHolder extends RecyclerView.ViewHolder {
         final ViewDataBinding binding;
 
@@ -72,10 +64,10 @@ public class DogBreedsAdapter extends RecyclerView.Adapter<DogBreedsAdapter.Gene
             this.binding = binding;
         }
 
-        void bind(DogBreed obj, DogBreedsViewModel viewModel) {
-            binding.setVariable(BR.obj, obj);
+        void bind(DogBreedsViewModel viewModel, Integer position) {
+            viewModel.fetchDogBreedImagesAt(position);
             binding.setVariable(BR.viewModel, viewModel);
-            obj.fetchImages();
+            binding.setVariable(BR.position, position);
             binding.executePendingBindings();
         }
 

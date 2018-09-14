@@ -43,7 +43,21 @@ public class DogBreedsViewModel extends ViewModel {
         return selected;
     }
 
-    public void onItemClick(DogBreed dogBreed) {
-        selected.setValue(dogBreed);
+    public void onItemClick(Integer index) {
+        selected.setValue(getDogBreedAt(index));
+    }
+
+    public DogBreed getDogBreedAt(Integer index) {
+        if (dogBreeds.getBreeds().getValue() != null && index != null) {
+            return dogBreeds.getBreeds().getValue().get(index);
+        }
+        return null;
+    }
+
+    public void fetchDogBreedImagesAt(Integer index) {
+        DogBreed dogBreed = getDogBreedAt(index);
+        if (dogBreed != null) {
+            dogBreed.fetchImages();
+        }
     }
 }

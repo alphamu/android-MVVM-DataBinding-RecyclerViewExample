@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="obj"
-            type="com.alimuzaffar.example.dogs.model.DogBreed" />
+            name="position"
+            type="java.lang.Integer" />
 
         <variable
             name="viewModel"
@@ -20,7 +20,7 @@
         android:background="@drawable/list_item_bg"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="@{() -> viewModel.onItemClick(obj)}"
+        android:onClick="@{() -> viewModel.onItemClick(position)}"
         android:paddingStart="32dp"
         android:paddingTop="16dp"
         android:paddingEnd="32dp"
@@ -31,7 +31,7 @@
             android:layout_height="48dp"
             android:background="@drawable/list_item_image_border"
             android:scaleType="centerCrop"
-            app:imageUrl="@{obj.thumbnailUrl}" />
+            app:imageUrl="@{viewModel.getDogBreedAt(position).thumbnailUrl}" />
 
         <TextView
             android:id="@+id/txtName"
@@ -41,7 +41,7 @@
             android:orientation="vertical"
             android:paddingStart="32dp"
             android:paddingEnd="32dp"
-            android:text="@{obj.breed}"
+            android:text="@{viewModel.getDogBreedAt(position).breed}"
             android:textSize="16dp"
             tools:text="Test" />
     </LinearLayout>
