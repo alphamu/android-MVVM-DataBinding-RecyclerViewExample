@@ -1,25 +1,34 @@
 package com.alimuzaffar.example.dogs.viewmodel;
 
+import android.util.Log;
+
 import com.alimuzaffar.example.dogs.R;
 import com.alimuzaffar.example.dogs.adapter.DogBreedsAdapter;
 import com.alimuzaffar.example.dogs.model.DogBreed;
+import com.alimuzaffar.example.dogs.model.DogBreedImages;
 import com.alimuzaffar.example.dogs.model.DogBreeds;
+import com.alimuzaffar.example.dogs.net.DogImagesCallback;
 
 import java.util.List;
 
+import androidx.databinding.ObservableArrayMap;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class DogBreedsViewModel extends ViewModel {
 
     private DogBreeds dogBreeds;
     private DogBreedsAdapter adapter;
     public MutableLiveData<DogBreed> selected;
+    public ObservableArrayMap<String, String> images;
 
     public void init() {
         dogBreeds = new DogBreeds();
         selected = new MutableLiveData<>();
         adapter = new DogBreedsAdapter(R.layout.view_dog_breed, this);
+        images = new ObservableArrayMap<>();
     }
 
     public void fetchList() {
@@ -57,7 +66,21 @@ public class DogBreedsViewModel extends ViewModel {
     public void fetchDogBreedImagesAt(Integer index) {
         DogBreed dogBreed = getDogBreedAt(index);
         if (dogBreed != null) {
-            dogBreed.fetchImages();
+            dogBreed.fetchImages(new DogImagesCallback(dogBreed.getBreed()) {
+                @Override
+                public void onResponse(Call<DogBreedImages> call, Response<DogBreedImages> response) {
+                    DogBreedImages body = response.body();
+                    if (body.getImages() != null && body.getImages().length > 0) {
+                        String thumbnailUrl = body.getImages()[0];
+                        images.put(getBreed(), thumbnailUrl);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<DogBreedImages> call, Throwable t) {
+                    Log.e("Test", t.getMessage(), t);
+                }
+            });
         }
     }
 }

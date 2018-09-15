@@ -31,7 +31,7 @@
             android:layout_height="48dp"
             android:background="@drawable/list_item_image_border"
             android:scaleType="centerCrop"
-            app:imageUrl="@{viewModel.getDogBreedAt(position).thumbnailUrl}" />
+            app:imageUrl='@{viewModel.images[viewModel.getDogBreedAt(position).breed]}' />
 
         <TextView
             android:id="@+id/txtName"
