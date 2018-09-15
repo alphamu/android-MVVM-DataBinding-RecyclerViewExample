@@ -65,7 +65,7 @@ public class DogBreedsViewModel extends ViewModel {
 
     public void fetchDogBreedImagesAt(Integer index) {
         DogBreed dogBreed = getDogBreedAt(index);
-        if (dogBreed != null) {
+        if (dogBreed != null && !images.containsKey(dogBreed.getBreed())) {
             dogBreed.fetchImages(new DogImagesCallback(dogBreed.getBreed()) {
                 @Override
                 public void onResponse(Call<DogBreedImages> call, Response<DogBreedImages> response) {
