@@ -14,9 +14,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DogBreeds extends BaseObservable {
-    String status;
-    List<DogBreed> breedsList = new ArrayList<>();
-    MutableLiveData<List<DogBreed>> breeds = new MutableLiveData<>();
+    private String status;
+    private List<DogBreed> breedsList = new ArrayList<>();
+    private MutableLiveData<List<DogBreed>> breeds = new MutableLiveData<>();
 
     public String getStatus() {
         return status;
@@ -32,10 +32,6 @@ public class DogBreeds extends BaseObservable {
 
     public MutableLiveData<List<DogBreed>> getBreeds() {
         return breeds;
-    }
-
-    public List<DogBreed> getBreedsList() {
-        return breedsList;
     }
 
     public void fetchList() {

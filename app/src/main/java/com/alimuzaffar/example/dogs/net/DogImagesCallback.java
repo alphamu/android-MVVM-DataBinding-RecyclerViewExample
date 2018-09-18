@@ -7,11 +7,11 @@ import retrofit2.Callback;
 public abstract class DogImagesCallback implements Callback<DogBreedImages> {
     private String breed;
 
-    public DogImagesCallback(String breed) {
+    protected DogImagesCallback(String breed) {
         this.breed = breed;
     }
 
-    public String getBreed() {
+    protected String getBreed() {
         return this.breed;
     }
 

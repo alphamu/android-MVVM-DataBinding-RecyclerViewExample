@@ -6,7 +6,7 @@ import androidx.databinding.BaseObservable;
 import retrofit2.Callback;
 
 public class DogBreed extends BaseObservable {
-    String breed;
+    private String breed;
 
     public String getBreed() {
         return breed;

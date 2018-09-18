@@ -15,9 +15,7 @@ import retrofit2.http.Path;
 
 public class Api {
 
-    private static Retrofit retrofit;
     private static ApiInterface api;
-    private static Gson gson;
     private static final String BASE_URL = "https://dog.ceo";
 
     public static ApiInterface getApi() {
@@ -28,13 +26,13 @@ public class Api {
                     .addInterceptor(logging)
                     .build();
 
-            gson = new GsonBuilder()
+            Gson gson = new GsonBuilder()
                     .registerTypeAdapter(
                             DogBreeds.class,
                             new JsonDogBreedsDeserializer())
                     .create();
 
-            retrofit = new Retrofit.Builder()
+            Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create(gson))
@@ -43,10 +41,6 @@ public class Api {
             api = retrofit.create(ApiInterface.class);
         }
         return api;
-    }
-
-    public static Gson getGson() {
-        return gson;
     }
 
     public interface ApiInterface {

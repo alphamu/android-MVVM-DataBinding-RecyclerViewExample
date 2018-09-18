@@ -3,9 +3,9 @@ package com.alimuzaffar.example.dogs.model;
 import com.google.gson.annotations.SerializedName;
 
 public class DogBreedImages {
-    String status;
+    private String status;
     @SerializedName("message")
-    String []  images;
+    private String [] images;
 
     public String getStatus() {
         return status;
