@@ -1,6 +1,7 @@
 package com.alimuzaffar.example.dogs;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.alimuzaffar.example.dogs.databinding.ActivityDogBreedsBinding;
@@ -37,11 +38,18 @@ public class DogBreedsActivity extends AppCompatActivity {
     }
 
     private void setupListUpdate() {
+        viewModel.loading.set(View.VISIBLE);
         viewModel.fetchList();
         viewModel.getBreeds().observe(this, new Observer<List<DogBreed>>() {
             @Override
             public void onChanged(List<DogBreed> dogBreeds) {
-                viewModel.setDogBreedsInAdapter(dogBreeds);
+                viewModel.loading.set(View.GONE);
+                if (dogBreeds.size() == 0) {
+                    viewModel.showEmpty.set(View.VISIBLE);
+                } else {
+                    viewModel.showEmpty.set(View.GONE);
+                    viewModel.setDogBreedsInAdapter(dogBreeds);
+                }
             }
         });
         setupListClick();

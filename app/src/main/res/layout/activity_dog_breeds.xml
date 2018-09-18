@@ -20,6 +20,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:setAdapter="@{model.getAdapter()}" />
+        
+        <androidx.core.widget.ContentLoadingProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:id="@+id/spinnerLoading"
+            android:indeterminate="true"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:visibility="@{model.loading}"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{model.showEmpty}"
+            android:text="No breeds were returned."/>
 
     </FrameLayout>
 </layout>

@@ -11,13 +11,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class JsonDogBreedsDeserializer implements JsonDeserializer<DogBreeds> {
     @Override
     public DogBreeds deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        Map<String, Object> map = new LinkedHashMap<>();
         DogBreeds breeds = new DogBreeds();
         if (json.isJsonObject()) {
             for (Map.Entry<String, JsonElement> entry : json.getAsJsonObject().entrySet()) {

@@ -1,6 +1,7 @@
 package com.alimuzaffar.example.dogs.viewmodel;
 
 import android.util.Log;
+import android.view.View;
 
 import com.alimuzaffar.example.dogs.R;
 import com.alimuzaffar.example.dogs.adapter.DogBreedsAdapter;
@@ -12,6 +13,7 @@ import com.alimuzaffar.example.dogs.net.DogImagesCallback;
 import java.util.List;
 
 import androidx.databinding.ObservableArrayMap;
+import androidx.databinding.ObservableInt;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import retrofit2.Call;
@@ -23,12 +25,16 @@ public class DogBreedsViewModel extends ViewModel {
     private DogBreedsAdapter adapter;
     public MutableLiveData<DogBreed> selected;
     public ObservableArrayMap<String, String> images;
+    public ObservableInt loading;
+    public ObservableInt showEmpty;
 
     public void init() {
         dogBreeds = new DogBreeds();
         selected = new MutableLiveData<>();
         adapter = new DogBreedsAdapter(R.layout.view_dog_breed, this);
         images = new ObservableArrayMap<>();
+        loading = new ObservableInt(View.GONE);
+        showEmpty = new ObservableInt(View.GONE);
     }
 
     public void fetchList() {
@@ -57,7 +63,9 @@ public class DogBreedsViewModel extends ViewModel {
     }
 
     public DogBreed getDogBreedAt(Integer index) {
-        if (dogBreeds.getBreeds().getValue() != null && index != null) {
+        if (dogBreeds.getBreeds().getValue() != null &&
+                index != null &&
+                dogBreeds.getBreeds().getValue().size() > index) {
             return dogBreeds.getBreeds().getValue().get(index);
         }
         return null;
@@ -83,4 +91,6 @@ public class DogBreedsViewModel extends ViewModel {
             });
         }
     }
+
+
 }
