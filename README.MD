@@ -6,5 +6,5 @@ The code uses [Dog API](https://dog.ceo/dog-api/) to load and display breed name
 
 ## Requirements
 
-As this code uses Jetpack, you will need Android Studio 3.2 RC+.
+As this code uses Jetpack, you will need Android Studio 3.2+.
 

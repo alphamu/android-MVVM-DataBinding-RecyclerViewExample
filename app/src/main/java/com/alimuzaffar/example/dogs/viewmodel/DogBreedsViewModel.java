@@ -59,7 +59,8 @@ public class DogBreedsViewModel extends ViewModel {
     }
 
     public void onItemClick(Integer index) {
-        selected.setValue(getDogBreedAt(index));
+        DogBreed db = getDogBreedAt(index);
+        selected.setValue(db);
     }
 
     public DogBreed getDogBreedAt(Integer index) {
